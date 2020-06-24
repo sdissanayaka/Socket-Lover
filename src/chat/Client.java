@@ -5,15 +5,23 @@
  */
 package chat;
 
+import static chat.Server.output;
+import static chat.Server.socketserver;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 /**
  *
  * @author acer
  */
 public class Client extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Client
-     */
+    static Socket socket;
+    static DataInputStream input;
+    static DataOutputStream output;
+    
     public Client() {
         initComponents();
     }
@@ -126,6 +134,29 @@ public class Client extends javax.swing.JFrame {
                 new Client().setVisible(true);
             }
         });
+        
+        try {
+            String msg = ""; //for receiving msgs
+            //make socket object to coonnect the client on the server running on 127.0.0.1
+            socket = new Socket("127.0.0.1",1201);//givethe IP address and port no which the server is runnig 
+            //IP address is of localhost because server is running on the same machine
+            //1201 is the port on which the server is running
+            
+            
+            //make datainput object and data output object
+            input = new DataInputStream(socket.getInputStream());
+            output = new DataOutputStream(socket.getOutputStream());
+            
+            //for receiving the msgs
+            while (!msg.equals("exit")){//loop will run until msg doesnot equel to exit
+                //reading the messages
+                msg = input.readUTF(); //utf is an object that can hold msg received by the client from the server
+                //displying the msg in the message area
+                msg_area.setText(msg_area.getText() + "\n Nisal " + msg);
+            }
+        
+        } catch(Exception e){
+    }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
