@@ -19,9 +19,12 @@ class CaesarCipher {
                 char ch = (char) (((int) text.charAt(i) +
                         shift - 65) % 26 + 65);
                 result.append(ch);
-            } else {
+            } else if (Character.isLowerCase(text.charAt(i))) {
                 char ch = (char) (((int) text.charAt(i) +
                         shift - 97) % 26 + 97);
+                result.append(ch);
+            } else {
+                char ch = (char) (((int) text.charAt(i) ));
                 result.append(ch);
             }
         }
@@ -37,9 +40,12 @@ class CaesarCipher {
                 char ch = (char) (((int) cipher.charAt(i) +
                         shift - 65) % 26 + 65);
                 result.append(ch);
-            } else {
+            } else  if (Character.isLowerCase(cipher.charAt(i)))  {
                 char ch = (char) (((int) cipher.charAt(i) +
                         shift - 97) % 26 + 97);
+                result.append(ch);
+            } else {
+                char ch = (char) (((int) cipher.charAt(i) ));
                 result.append(ch);
             }
         }
