@@ -53,6 +53,11 @@ public class Client extends javax.swing.JFrame {
 
         msg_send.setBackground(new java.awt.Color(0, 204, 204));
         msg_send.setText("Send");
+        msg_send.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                msg_sendActionPerformed(evt);
+            }
+        });
 
         msg_area.setColumns(20);
         msg_area.setRows(5);
@@ -100,6 +105,21 @@ public class Client extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void msg_sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msg_sendActionPerformed
+        // button handling for sending message
+        try{
+        String msg = "";
+        msg = msg_text.getText(); ///enterd msg is stored into msg
+        output.writeUTF(msg);//writing the msg
+        msg_text.setText("");//clear the text feild empty
+        }
+        catch(Exception e)
+        {
+            //handle the exception
+        }
+        
+    }//GEN-LAST:event_msg_sendActionPerformed
 
     /**
      * @param args the command line arguments
