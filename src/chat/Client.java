@@ -5,8 +5,7 @@
  */
 package chat;
 
-import static chat.Server.output;
-import static chat.Server.socketserver;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
