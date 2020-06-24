@@ -109,6 +109,7 @@ public class Server extends javax.swing.JFrame {
         try {
         String msg="";
         msg = msg_text.getText();
+        msg_area.setText(msg_area.getText() + "\n Me: " + msg);
         int shiftCount = 1;
         String cipher = encrypt(msg, shiftCount).toString();
         output.writeUTF(cipher);
