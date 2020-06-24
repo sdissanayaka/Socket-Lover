@@ -171,7 +171,7 @@ public class Client extends javax.swing.JFrame {
                 //reading the messages
                 msg = input.readUTF(); //utf is an object that can hold msg received by the client from the server
                 //displying the msg in the message area
-                msg_area.setText(msg_area.getText() + "\n Nisal " + msg);
+                msg_area.setText(msg_area.getText() + "\n Nisal: " + msg);
             }
         
         } catch(Exception e){
