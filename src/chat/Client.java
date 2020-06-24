@@ -7,6 +7,8 @@ package chat;
 
 //import static chat.Server.output;
 //import static chat.Server.socketserver;
+import static chat.CaesarCipher.decrypt;
+import static chat.CaesarCipher.encrypt;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
@@ -108,10 +110,12 @@ public class Client extends javax.swing.JFrame {
     private void msg_sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msg_sendActionPerformed
         // button handling for sending message
         try{
-        String msg = "";
-        msg = msg_text.getText(); ///enterd msg is stored into msg
-        output.writeUTF(msg);//writing the msg
-        msg_text.setText("");//clear the text feild empty
+        String msg="";
+        msg = msg_text.getText();
+        int shiftCount = 1;
+        String cipher = encrypt(msg, shiftCount).toString();
+        output.writeUTF(cipher);
+        msg_text.setText("");
         }
         catch(Exception e)
         {
@@ -171,7 +175,9 @@ public class Client extends javax.swing.JFrame {
                 //reading the messages
                 msg = input.readUTF(); //utf is an object that can hold msg received by the client from the server
                 //displying the msg in the message area
-                msg_area.setText(msg_area.getText() + "\n Nisal: " + msg);
+                int shiftCount = 1;
+                String dmsg = decrypt(msg, 26 - shiftCount).toString();
+                msg_area.setText(msg_area.getText() + "\n Nisal: " + dmsg);
             }
         
         } catch(Exception e){

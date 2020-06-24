@@ -5,6 +5,9 @@
  */
 package chat;
 
+ 
+import static chat.CaesarCipher.decrypt;
+import static chat.CaesarCipher.encrypt;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.ServerSocket;
@@ -106,13 +109,16 @@ public class Server extends javax.swing.JFrame {
         try {
         String msg="";
         msg = msg_text.getText();
-        output.writeUTF(msg);
+        int shiftCount = 1;
+        String cipher = encrypt(msg, shiftCount).toString();
+        output.writeUTF(cipher);
         msg_text.setText("");
         }
         catch (Exception e)
         {
             //Handle the exception
         }
+        
     }//GEN-LAST:event_msg_sendActionPerformed
 
     /**
@@ -161,7 +167,9 @@ public class Server extends javax.swing.JFrame {
                 //reading the messages
                 msg = input.readUTF(); //utf is an object that can hold msg received by the client from the server
                 //displying the msg in the message area
-                msg_area.setText(msg_area.getText()+ "\n Sunethra : " + msg);
+                int shiftCount = 1;
+                String dmsg = decrypt(msg, 26 - shiftCount).toString();
+                msg_area.setText(msg_area.getText()+ "\n Sunethra : " + dmsg);
             }
 
         } catch (Exception e) {
